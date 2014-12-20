@@ -1,40 +1,51 @@
-<form class="form-horizontal">
+<form role="form" class="form-horizontal" method="post" action="index.php" enctype="">
     <fieldset>
 
         <!-- Form Name -->
-        <legend>Form Name</legend>
+        <legend></legend>
+
 
         <!-- Text input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Text Input</label>
+            <label class="col-md-4 control-label" for="inputName">Your name</label>
             <div class="col-md-4">
-                <input id="textinput" name="textinput" placeholder="placeholder" class="form-control input-md" type="text">
-                <span class="help-block">help</span>
+                <input id="inputName" name="name" placeholder="Nick Cave" class="form-control input-md" type="text">
+                <span class="help-block"></span>
             </div>
         </div>
 
         <!-- Text input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Text Input</label>
+            <label class="col-md-4 control-label" for="inputEMail">Your e-mail</label>
             <div class="col-md-4">
-                <input id="textinput" name="textinput" placeholder="placeholder" class="form-control input-md" type="text">
-                <span class="help-block">help</span>
+                <input id="inputEMail" name="email" placeholder="nick@cave.bs" class="form-control input-md" type="text">
+                <span class="help-block"></span>
             </div>
         </div>
 
         <!-- Textarea -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="textarea">Text Area</label>
+            <label class="col-md-4 control-label" for="textarea">Your comment...</label>
             <div class="col-md-4">
-                <textarea class="form-control" id="textarea" name="textarea">default text</textarea>
+                <textarea class="form-control" id="textarea" name="comment" rows="3" placeholder="Dig yourself, Lazarus!"></textarea>
+                <span class="help-block"></span>
+            </div>
+        </div>
+
+        <!-- CAPCHA -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="captcha"><img src="123.jpeg"></label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="captcha" name="captcha" placeholder="What you see?">
+                <span class="help-block"></span>
             </div>
         </div>
 
         <!-- Button -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+            <label class="col-md-4 control-label" for="singlebutton"></label>
             <div class="col-md-4">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+                <input type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Post comment">
             </div>
         </div>
 
