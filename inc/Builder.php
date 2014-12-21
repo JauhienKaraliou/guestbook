@@ -65,9 +65,9 @@ class Builder
     public function createPage($templates)
     {
         $headerTemplate = file_get_contents($templates['header']);
-        $headerTemplate = str_replace("{{PAGE_TITLE}}", "guestbook", $header);
+        $header = str_replace("{{PAGE_TITLE}}", "guestbook", $headerTemplate);
         $bodyTemplate =  file_get_contents($templates['body']);
-        $page = $headerTemplate.$bodyTemplate;
+        $page = $header.$bodyTemplate;
         $messageTemplate = file_get_contents($templates['message']);
 
         $comments = $this->dbh->getComments();
@@ -78,8 +78,15 @@ class Builder
             $page.= $message;
         }
         $formTemplate = file_get_contents($templates['form']);
-        $defaultStatments = $this->defaultValues;
-        $page.=
+        $defaultStatements = $this->defaultValues;
+        $form = str_replace('{{DEFAULT_NAME}}',$defaultStatements['name'],$formTemplate);
+        $form = str_replace('{{DEFAULT_EMAIL}}',$defaultStatements['email'],$form);
+        $form = str_replace('{{DEFAULT_TEXT}}',$defaultStatements['text'],$form);
+        $page.= $form;
+        $footerTemplate = file_get_contents($templates['footer']);
+        $page.= $footerTemplate;
+        return $page;
+
 
 
 
