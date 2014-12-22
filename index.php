@@ -25,9 +25,7 @@ include 'inc/NewMessage.php';
 
 $page = new Builder(USER, PASSWORD, DSN);
 if($_POST) {
-    var_dump($_POST);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!delete
-
-    $page->saveNewMessage();
+   $page->saveNewMessage();
 
 }
 

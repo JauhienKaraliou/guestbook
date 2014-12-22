@@ -64,6 +64,7 @@ class Builder
         $messageTemplate = file_get_contents($templates['message']);
 
         $comments = $this->dbh->getComments();
+
         foreach ($comments as $c) {
             $message = str_replace('{{AUTHOR}}', $c['username'], $messageTemplate);
             $message = str_replace('{{DATE}}', $c['date_time'], $message);

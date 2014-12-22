@@ -35,9 +35,7 @@ class DBStorage
     {
         $stsh = $this->dbh->prepare("INSERT INTO cmnt (`id_comment`, `username`,`comment`, `email`, `date_time`, `ip`, `client`)
        VALUES (:id_comment, :username,  :comment, :email, :date_time, :ip, :client)");
-        var_dump($arr);
         $stsh->execute($arr);
-        echo $stsh->debugDumpParams();
         return;
     }
 
