@@ -10,21 +10,13 @@ class Builder
 {
     public $dbh;
     public $defaultValues;
-    public function __construct($user,$pasw)
+    public function __construct($user, $pasw, $dsn)
     {
-        $this->dbh= new DBStorage($user, $pasw);
+        $this->dbh= new DBStorage($user, $pasw, $dsn);
     }
 
 
-    public function checkPost()
-    {
-        if($_POST) {
-            return true;
-        } else {
-            return null;
-        }
 
-    }
     /*
     public static function checkGet()
     {
@@ -49,14 +41,15 @@ class Builder
      * @param $user
      * @param $pasw
      */
-    public function newMess()
+    public function saveNewMessage()
     {
-        $data = new NewMessage();
-        if($data->readForm()==null) {
-            $dataToInsert = $data->insertData();
+        $newMessage = new NewMessage();
+        if($newMessage->checkForm()== null) {
+            $dataToInsert = $newMessage->insertData();
+
             $this->dbh->putComment($dataToInsert);
         } else {
-            $this->defaultValues = $data-> getDefaultValues();
+            $this->defaultValues = $newMessage-> getDefaultValues();
         }
 
     }
@@ -72,17 +65,20 @@ class Builder
 
         $comments = $this->dbh->getComments();
         foreach ($comments as $c) {
-            $message = str_replace('{{AUTHOR}}', $c['name'], $messageTemplate);
+            $message = str_replace('{{AUTHOR}}', $c['username'], $messageTemplate);
             $message = str_replace('{{DATE}}', $c['date_time'], $message);
             $message = str_replace('{{MESSAGE_TEXT}}', $c['comment'], $message);
             $page.= $message;
         }
         $formTemplate = file_get_contents($templates['form']);
+        /*
         $defaultStatements = $this->defaultValues;
         $form = str_replace('{{DEFAULT_NAME}}',$defaultStatements['name'],$formTemplate);
         $form = str_replace('{{DEFAULT_EMAIL}}',$defaultStatements['email'],$form);
         $form = str_replace('{{DEFAULT_TEXT}}',$defaultStatements['text'],$form);
         $page.= $form;
+        */
+        $page.= $formTemplate;  //!!!!!!!!!!!!!!!!!!!!delete
         $footerTemplate = file_get_contents($templates['footer']);
         $page.= $footerTemplate;
         return $page;

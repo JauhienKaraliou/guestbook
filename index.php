@@ -7,6 +7,7 @@
  */
 define('USER','root');
 define('PASSWORD','1276547');
+define('DSN', 'mysql:host=localhost; dbname=guestbook');
 
 $templateFiles = array(
     'header'=>'tpl/header.html',
@@ -22,14 +23,15 @@ include 'inc/DBStorage.php';
 include 'inc/NewMessage.php';
 
 
-$page = new Builder(USER, PASSWORD);
-$post = $page->checkPost();
-if($post) {
-    $page->newMess();
+$page = new Builder(USER, PASSWORD, DSN);
+if($_POST) {
+    var_dump($_POST);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!delete
+
+    $page->saveNewMessage();
+
 }
 
-
-$page->createPage($templateFiles);
+echo $page->createPage($templateFiles);
 //$page->checkGet();
 
 

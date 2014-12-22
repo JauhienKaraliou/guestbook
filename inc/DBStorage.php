@@ -8,20 +8,18 @@
 
 class DBStorage
 {
-    public $user;
-    public $pasw;
+
     public $dbh;
-    public $arr;
+
 
     /**
      * @param $user
      * @param $pasw
      */
-    public function __construct($user, $pasw) {
-        $this->user = $user;
-        $this->pasw = $pasw;
+    public function __construct($user, $pasw, $dsn) {
+
         try {
-            $this->dbh = new PDO('mysql:host=localhost; dbname=guestbook',$this->user, $this->pasw, array(PDO::ATTR_PERSISTENT));
+            $this->dbh = new PDO($dsn, $user, $pasw, array(PDO::ATTR_PERSISTENT));
 
         } catch (PDOException $e) {
             print "Error:".$e->getMessage().'<br>';
@@ -35,10 +33,12 @@ class DBStorage
      */
     public function putComment ($arr)
     {
-        $stsh = $this->dbh->prepare("INSERT INTO cmnt (`id_comment`,`name`,`comment`, `email`, `date_time`, `ip`, `client`)
-       VALUES ( :id_comment, :name, :comment, :email,:date_time, :ip,:client)");
-        $a = $stsh->execute($arr);
-        return $a;
+        $stsh = $this->dbh->prepare("INSERT INTO cmnt (`id_comment`, `username`,`comment`, `email`, `date_time`, `ip`, `client`)
+       VALUES (:id_comment, :username,  :comment, :email, :date_time, :ip, :client)");
+        var_dump($arr);
+        $stsh->execute($arr);
+        echo $stsh->debugDumpParams();
+        return;
     }
 
     /**

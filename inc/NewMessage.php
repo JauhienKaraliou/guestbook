@@ -23,7 +23,7 @@ class NewMessage
         return $eMes[$i];
     }
 
-    public function readForm()
+    public function checkForm()
     {
 
         $errMess = null;
@@ -47,18 +47,19 @@ class NewMessage
         } else {
             $this->arr['captcha'] = htmlspecialchars($_POST['captcha']); //sanitize! check captcha
         }
-        return $errMess;
+        return null;
     }
     public function insertData()
     {
         $dataToInsert=array();
         $dataToInsert['id_comment']=time();
-        $dataToInsert['name'] = $this->arr['name'];
+        $dataToInsert['username'] = $this->arr['name'];
         $dataToInsert['comment']=$this->arr['comment'];
         $dataToInsert['email']=$this->arr['email'];
         $dataToInsert['date_time']=date("Y-m-d H:i:s");
         $dataToInsert['ip'] =  $_SERVER['REMOTE_ADDR']; //unsafe
         $dataToInsert['client']=$_SERVER['HTTP_USER_AGENT']; //unsafe!
+
         return $dataToInsert;
     }
 
